@@ -1,0 +1,11 @@
+FROM pytorch/pytorch:1.12.1-cuda11.3-cudnn8-devel
+
+COPY . /mmdetection3d
+
+RUN apt-get update && apt-get install -y libgl1 libglib2.0-0
+RUN pip install -U openmim
+RUN pip install mmcv-full==1.6.0 -f https://download.openmmlab.com/mmcv/dist/cu113/torch1.12/index.html
+RUN mim install mmdet mmsegmentation open3d
+RUN pip install -v -e /mmdetection3d
+
+CMD bash
